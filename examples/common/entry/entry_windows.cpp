@@ -510,7 +510,7 @@ namespace entry
 			while (!m_exit)
 			{
 				s_xinput.update(m_eventQueue);
-				WaitForInputIdle(GetCurrentProcess(), 16);
+				WaitForSingleObject(GetCurrentProcess(), 33);
 
 				while (0 != PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE) )
 				{

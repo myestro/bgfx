@@ -36,6 +36,12 @@
 #   define ARRAY_END() }
 #endif // BGFX_SHADER_LANGUAGE_GLSL
 
+#if BGFX_SHADER_LANGUAGE_GLSL
+#   define POINTSIZE gl_PointSize
+#else
+#   define POINTSIZE float __glPointSize
+#endif
+
 #if BGFX_SHADER_LANGUAGE_HLSL || BGFX_SHADER_LANGUAGE_PSSL || BGFX_SHADER_LANGUAGE_SPIRV
 #	define CONST(_x) static const _x
 #	define dFdx(_x) ddx(_x)

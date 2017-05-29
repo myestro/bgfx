@@ -276,6 +276,10 @@ namespace bgfx { namespace gl
 	{
 		if (NULL != g_platformData.nwh)
 		{
+			// Intel Iris 540 wants to have a clean OpenGL pipeline
+			glFlush();
+			glFinish();
+
 			wglMakeCurrent(NULL, NULL);
 
 			wglDeleteContext(m_context);
