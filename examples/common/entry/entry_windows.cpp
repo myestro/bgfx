@@ -461,13 +461,13 @@ namespace entry
 			wnd.hInstance = instance;
 			wnd.hIcon = LoadIcon(NULL, IDI_APPLICATION);
 			wnd.hCursor = LoadCursor(NULL, IDC_ARROW);
-			wnd.lpszClassName = "bgfx";
+			wnd.lpszClassName = "3D Viewer";
 			wnd.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 			RegisterClassExA(&wnd);
 
 			m_windowAlloc.alloc();
-			m_hwnd[0] = CreateWindowA("bgfx"
-				, "BGFX"
+			m_hwnd[0] = CreateWindowA("3D Viewer"
+				, "3D Viewer"
 				, WS_OVERLAPPEDWINDOW|WS_VISIBLE
 				, 0
 				, 0
@@ -537,7 +537,7 @@ namespace entry
 				case WM_USER_WINDOW_CREATE:
 					{
 						Msg* msg = (Msg*)_lparam;
-						HWND hwnd = CreateWindowA("bgfx"
+						HWND hwnd = CreateWindowA("3D Viewer"
 							, msg->m_title.c_str()
 							, WS_OVERLAPPEDWINDOW|WS_VISIBLE
 							, msg->m_x
@@ -967,6 +967,36 @@ namespace entry
 			}
 		}
 
+		void reset()
+		{
+			// free all pending events
+			while (const Event* event = m_eventQueue.poll())
+			{
+				m_eventQueue.release(event);
+			}
+
+			memset(&m_hwnd[0], 0, sizeof(m_hwnd));
+			memset(&m_flags[0], 0, sizeof(m_flags));
+			memset(&m_rect, 0, sizeof(m_rect));
+			m_style = 0;
+			m_width = 0;
+			m_height = 0;
+			m_oldWidth = 0;
+			m_oldHeight = 0;
+			m_frameWidth = 0;
+			m_frameHeight = 0;
+			m_aspectRatio = 0;
+
+			m_mx = 0;
+			m_my = 0;
+			m_mz = 0;
+
+			m_frame = true;
+			m_mouseLock = NULL;
+			m_init = false;
+			m_exit = false;
+		}
+
 		static LRESULT CALLBACK wndProc(HWND _hwnd, UINT _id, WPARAM _wparam, LPARAM _lparam);
 
 		EventQueue m_eventQueue;
@@ -1098,6 +1128,8 @@ namespace entry
 int main(int _argc, char** _argv)
 {
 	using namespace entry;
+
+	s_ctx.reset();
 	return s_ctx.run(_argc, _argv);
 }
 
