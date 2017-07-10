@@ -146,7 +146,7 @@ namespace entry
 		PP_Resource resource = g_messageLoopInterface->Create(g_instance);
 		g_messageLoopInterface->AttachToCurrentThread(resource);
 
-		int32_t result = main(self->m_argc, self->m_argv);
+        int32_t result = entry::main(self->m_argc, self->m_argv);
 		return result;
 	}
 

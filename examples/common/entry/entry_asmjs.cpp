@@ -113,7 +113,7 @@ namespace entry
 			emscripten_set_focusin_callback(NULL, this, true, focusCb);
 			emscripten_set_focusout_callback(NULL, this, true, focusCb);
 
-			int32_t result = main(_argc, _argv);
+            int32_t result = entry::main(_argc, _argv);
 			return result;
 		}
 
@@ -397,7 +397,7 @@ namespace entry
 	}
 }
 
-int main(int _argc, char** _argv)
+int BGFX_MAIN(int _argc, char** _argv)
 {
 	using namespace entry;
 	return s_ctx.run(_argc, _argv);

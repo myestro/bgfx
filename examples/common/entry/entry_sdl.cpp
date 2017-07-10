@@ -1092,7 +1092,7 @@ namespace entry
 	int32_t MainThreadEntry::threadFunc(void* _userData)
 	{
 		MainThreadEntry* self = (MainThreadEntry*)_userData;
-		int32_t result = main(self->m_argc, self->m_argv);
+		int32_t result = entry::main(self->m_argc, self->m_argv);
 
 		SDL_Event event;
 		SDL_QuitEvent& qev = event.quit;
@@ -1103,7 +1103,7 @@ namespace entry
 
 } // namespace entry
 
-int main(int _argc, char** _argv)
+int BGFX_MAIN(int _argc, char** _argv)
 {
 	using namespace entry;
 	return s_ctx.run(_argc, _argv);

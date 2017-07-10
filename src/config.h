@@ -8,6 +8,10 @@
 
 #include <bx/config.h>
 
+#if !defined(BGFX_MAIN)
+#   define BGFX_MAIN main
+#endif
+
 #ifndef BGFX_CONFIG_DEBUG
 #	define BGFX_CONFIG_DEBUG 0
 #endif // BGFX_CONFIG_DEBUG
