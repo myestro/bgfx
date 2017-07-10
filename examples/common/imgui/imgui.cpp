@@ -1674,8 +1674,13 @@ struct Imgui
 			xx = area.m_contentX + area.m_widgetW - _width;
 		}
 
-		const int32_t yy = area.m_widgetY;
+		int32_t yy = area.m_widgetY;
 		area.m_widgetY += _height + DEFAULT_SPACING;
+
+        if (ImguiAlign::Center == _align)
+        {
+            yy = (area.m_contentHeight - _height) / 2;
+        }
 
 		if (screenQuad(xx, yy, _width, _height) )
 		{
